@@ -11,7 +11,37 @@ function killsCalculator() {
     } else {
         $kills = $avgKillsMid;
     }
-    echo $kills;
+    return $kills;
+}
+
+function deathsCalculator() {
+    $probability = rand(0, 100);
+    $avgDeathsLow = rand(0, 2);
+    $avgDeathsMid = rand(3, 8);
+    $avgDeathsHigh = rand(9, 15);
+    if ($probability < 20) {
+        $deaths = $avgDeathsLow;
+    } elseif ($probability > 80) {
+        $deaths = $avgDeathsHigh;
+    } else {
+        $deaths = $avgDeathsMid;
+    }
+    return $deaths;
+}
+
+function assistsCalculator() {
+    $probability = rand(0, 100);
+    $avgAssistsLow = rand(0, 4);
+    $avgAssistsMid = rand(5, 14);
+    $avgAssistsHigh = rand(15, 30);
+    if ($probability < 20) {
+        $assists = $avgAssistsLow;
+    } elseif ($probability > 80) {
+        $assists = $avgAssistsHigh;
+    } else {
+        $assists = $avgAssistsMid;
+    }
+    return $assists;
 }
 ?>
 
@@ -23,6 +53,8 @@ function killsCalculator() {
         <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
     </head>
     <body>
-        <?php killsCalculator() ?>
+        <?php
+        echo "KDA: " . killsCalculator() . "/" . deathsCalculator() . "/" . assistsCalculator();
+        ?>
     </body>
 </html>
