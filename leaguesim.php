@@ -89,20 +89,8 @@ function avgCSCalculator() {
     }
     return $gameCS;
 }
-?>
 
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <title>text demo</title>
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-</head>
-<body>
-<?php
 echo "KDA: " . killsCalculator() . "/" . deathsCalculator() . "/" . assistsCalculator();
 echo "<br>Creep Score: " .avgCSCalculator();
 echo "<br>Duration: " . gameTimeCalculator() . " min";
-?>
-</body>
-</html>
+
