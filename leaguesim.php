@@ -73,7 +73,7 @@ function avgCSCalculator() {
     $supProbability = rand(0, 100);
     $supAvgCS = rand(20, 40);
     if ($supProbability < 20) {
-        $gameCS = $supAvgCS . " (sup)";
+        $gameCS = $supAvgCS . " (supp)";
     } else {
         if ($probability < 20) {
             $gameCS = $avgCSLow;
@@ -90,7 +90,22 @@ function avgCSCalculator() {
     return $gameCS;
 }
 
+function BECalculator() {
+    $BELow = rand(100, 500);
+    $BEMid = rand(500, 1000);
+    $BEHigh = rand(1000, 1500);
+    if (gameTimeCalculator() < 20) {
+        $BEReward = $BELow;
+    } elseif (gameTimeCalculator() > 40) {
+        $BEReward = $BEHigh;
+    } else {
+        $BEReward = $BEMid;
+    }
+    return $BEReward;
+}
+
 echo "KDA: " . killsCalculator() . "/" . deathsCalculator() . "/" . assistsCalculator();
 echo "<br>Creep Score: " .avgCSCalculator();
 echo "<br>Duration: " . gameTimeCalculator() . " min";
+echo "<br>Blue Essence rewarded: " . BECalculator();
 
