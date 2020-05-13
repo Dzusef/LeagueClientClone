@@ -18,12 +18,6 @@ echo "<br>Name: " . $_SESSION['username'];
 echo "<br>Email: " . strval($row2[0]);
 echo "<br>Currency(BE): " . intval($row[0]);
 
-?>
-<form method="post">
-    <br><input type="submit" name="Logout"
-               class="button" value="Logout" />
-</form>
-<?php
 if(array_key_exists('Logout', $_POST)) {
     $sqlLogout = "UPDATE customeraccounts SET Status='Offline' WHERE Name='".$_SESSION['username']."'";
     if ($link->query($sqlLogout) === TRUE) {
@@ -34,8 +28,11 @@ if(array_key_exists('Logout', $_POST)) {
     header('Location: Login.php');
     exit;
 }
+?>
+<br><br><button type="button" id="addGame">Generate game</button>
+<div id="gameStats"></div>
+<?php
 
-include("leaguesim.php");
 echo "<br>" . "<br>" . "<br>" . "<br>" . "<br>";
 echo "<h3> ===/Friends\===</h3>";
 ?>
@@ -44,5 +41,20 @@ echo "<h3> ===/Friends\===</h3>";
     <input type="AddFriend" name="AddFriend">
     <input type="submit" name="Add" value="Add">
 </form>
+
+<form method="post">
+    <br><input type="submit" name="Logout"
+               class="button" value="Logout" />
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#addGame").click(function () {
+            $('#gameStats').load('leaguesim.php')
+        });
+    });
+</script>
 </body>
 </html>
