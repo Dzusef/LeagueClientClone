@@ -90,22 +90,30 @@ function avgCSCalculator() {
     return $gameCS;
 }
 
-function BECalculator() {
-    $BELow = rand(100, 500);
-    $BEMid = rand(500, 1000);
-    $BEHigh = rand(1000, 1500);
-    if (gameTimeCalculator() < 20) {
-        $BEReward = $BELow;
-    } elseif (gameTimeCalculator() > 40) {
-        $BEReward = $BEHigh;
-    } else {
-        $BEReward = $BEMid;
-    }
-    return $BEReward;
+$BELow = rand(100, 500);
+$BEMid = rand(500, 1000);
+$BEHigh = rand(1000, 1500);
+if (gameTimeCalculator() < 20) {
+    $BEReward = $BELow;
+} elseif (gameTimeCalculator() > 40) {
+    $BEReward = $BEHigh;
+} else {
+    $BEReward = $BEMid;
 }
 
 echo "KDA: " . killsCalculator() . "/" . deathsCalculator() . "/" . assistsCalculator();
-echo "<br>Creep Score: " .avgCSCalculator();
+echo "<br>Creep Score: " . avgCSCalculator();
 echo "<br>Duration: " . gameTimeCalculator() . " min";
-echo "<br>Blue Essence rewarded: " . BECalculator();
+echo "<br>Blue Essence rewarded: " . $BEReward;
 
+include("Connector.php");
+
+$queryCurrency = mysqli_query($link,"SELECT CurrencyBE FROM customeraccounts WHERE Name='".$_SESSION['username']."'");
+$row = mysqli_fetch_array($queryCurrency);
+$updatedBE = intval($row[0]) + $BEReward;
+$sqlLogout = "UPDATE customeraccounts SET CurrencyBE=$updatedBE WHERE Name='".$_SESSION['username']."'";
+if ($link->query($sqlLogout) === TRUE) {
+    echo "Record updated successfully";
+} else {
+    echo "Error updating record: " . $link->error;
+}
