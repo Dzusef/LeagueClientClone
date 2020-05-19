@@ -13,6 +13,8 @@ $queryCurrency = mysqli_query($link,"SELECT CurrencyBE FROM customeraccounts WHE
 $row = mysqli_fetch_array($queryCurrency);
 $row2 = mysqli_fetch_array($queryEmail);
 
+$_SESSION['currencyBE'] = intval($row[0]);
+
 echo "<h3> ===/Welcome " . $_SESSION['username'] . "\===</h3>";
 echo "<br>Name: " . $_SESSION['username'];
 echo "<br>Email: " . strval($row2[0]);
