@@ -3,7 +3,7 @@
   $sql = "SELECT Name,Email FROM customeraccounts";
   if($result = mysqli_query($link, $sql)) {
 
-    if((isset($_POST['uname']) != "") && ((isset($_POST['email'])) != "") && (($_POST['password']) === ($_POST['retype'])) {
+    if((isset($_POST['uname']) != "") && ((isset($_POST['email'])) != "") && (($_POST['password']) === ($_POST['retype']))) {
 
       $query = mysqli_query($link,"SELECT Name,Email FROM customeraccounts WHERE Name='".$_POST['uname']."' OR Email='".$_POST['email']."'");
       if (mysqli_num_rows($query) == 1) {
